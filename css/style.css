@@ -1,0 +1,332 @@
+/* Old School Web CSS - GeoCities/MySpace Inspired */
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
+    background-color: #000080; /* Navy blue background */
+    background-color: #000080; /* Navy blue background instead of stars.gif */
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+    background-color: #000040;
+    border: 4px ridge #c0c0c0;
+    box-shadow: 0 0 20px #00ffff;
+}
+
+/* Header Styles */
+.header {
+    background-color: #000000;
+    /* Using solid color instead of flames.gif */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px ridge #ff00ff;
+}
+
+.header-content {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border: 2px solid #ff00ff;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #ff00ff;
+    text-shadow: 2px 2px 4px #00ffff, -2px -2px 4px #ffff00;
+    margin: 0 0 15px 0;
+}
+
+.under-construction {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.visitor-counter {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.counter {
+    background-color: #000000;
+    color: #ff0000;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    padding: 3px 8px;
+    border: 1px solid #ff0000;
+}
+
+/* Marquee Styles */
+.marquee-container {
+    background-color: #000000;
+    padding: 5px 0;
+    border-bottom: 3px ridge #00ffff;
+}
+
+marquee {
+    color: #ffff00;
+    font-weight: bold;
+}
+
+/* Main Content Styles */
+.main-content {
+    display: flex;
+    background-color: #000040;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 200px;
+    padding: 15px;
+    background-color: #000060;
+    border-right: 3px ridge #c0c0c0;
+}
+
+.navigation h3 {
+    color: #00ffff;
+    text-align: center;
+    margin-top: 0;
+    text-shadow: 1px 1px 2px #ff00ff;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation li {
+    margin-bottom: 8px;
+    border: 1px solid #00ffff;
+    background-color: #000080;
+    text-align: center;
+}
+
+.navigation li.active {
+    background-color: #0000ff;
+    border: 1px solid #ffffff;
+}
+
+.navigation a {
+    display: block;
+    padding: 5px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navigation a:hover {
+    background-color: #0000ff;
+    color: #ffff00;
+}
+
+.dragon-art {
+    margin: 20px 0;
+    text-align: center;
+    color: #00ff00;
+    font-size: 10px;
+}
+
+.dragon-caption {
+    color: #ffff00;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.best-viewed {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px dashed #c0c0c0;
+    padding-top: 10px;
+}
+
+.browser-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+/* Content Styles */
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #000040;
+}
+
+h2 {
+    color: #00ffff;
+    text-align: center;
+    border-bottom: 2px groove #00ffff;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px 2px #ff00ff;
+}
+
+h3 {
+    color: #ffff00;
+    text-shadow: 1px 1px 2px #ff00ff;
+}
+
+.intro {
+    margin-bottom: 20px;
+    border: 1px dashed #c0c0c0;
+    padding: 10px;
+    background-color: #000060;
+}
+
+a {
+    color: #00ffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #ff00ff;
+    text-decoration: underline;
+}
+
+.updates {
+    margin-bottom: 20px;
+}
+
+.update-item {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #c0c0c0;
+    padding-bottom: 5px;
+}
+
+.update-date {
+    width: 100px;
+    color: #ffff00;
+    font-weight: bold;
+}
+
+.guestbook {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    border: 2px ridge #c0c0c0;
+    background-color: #000060;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #000000;
+    padding: 15px;
+    text-align: center;
+    border-top: 3px ridge #ff00ff;
+    font-size: 14px;
+}
+
+.webring {
+    margin-bottom: 10px;
+}
+
+.copyright {
+    margin-bottom: 10px;
+    color: #c0c0c0;
+}
+
+/* Special Elements */
+pre {
+    font-family: monospace;
+    line-height: 1;
+    overflow: hidden;
+}
+
+/* Page-specific styles */
+/* About page */
+.about-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    border: 3px ridge #00ffff;
+    padding: 5px;
+    background-color: #000000;
+}
+
+/* Projects page */
+.project-item {
+    margin-bottom: 30px;
+    border: 1px solid #00ffff;
+    padding: 15px;
+    background-color: #000060;
+}
+
+.project-screenshot {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.project-screenshot img {
+    border: 2px solid #ffffff;
+    max-width: 100%;
+}
+
+/* Bookshelf page */
+.book-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px dotted #c0c0c0;
+    padding-bottom: 15px;
+}
+
+.book-cover {
+    width: 100px;
+    border: 2px solid #ffffff;
+}
+
+/* Web rings page */
+.webring-item {
+    margin-bottom: 20px;
+    text-align: center;
+    border: 2px ridge #c0c0c0;
+    padding: 10px;
+    background-color: #000060;
+}
+
+/* Setup page */
+.setup-section {
+    margin-bottom: 25px;
+    border-bottom: 1px dashed #c0c0c0;
+    padding-bottom: 15px;
+}
+
+/* Blogroll page */
+.blogroll-category {
+    margin-bottom: 20px;
+}
+
+.blogroll-item {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.blogroll-item::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #ffff00;
+}
