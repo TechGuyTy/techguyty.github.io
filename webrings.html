@@ -3,14 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Rings - My Retro Saloon</title>
+    <title>NOT codewords - My Retro Saloon</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Game-specific styles */
+        .game-container {
+            border: 3px ridge #00ffff;
+            padding: 15px;
+            background-color: #000060;
+            margin-bottom: 20px;
+        }
+        
+        .game-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .game-controls button {
+            background-color: #000080;
+            color: #ffff00;
+            border: 2px ridge #c0c0c0;
+            padding: 5px 10px;
+            font-family: "Comic Sans MS", sans-serif;
+            cursor: pointer;
+        }
+        
+        .game-controls button:hover {
+            background-color: #0000ff;
+        }
+        
+        .timer-display {
+            font-size: 24px;
+            color: #ff00ff;
+            text-align: center;
+            margin: 10px 0;
+            font-family: "Courier New", monospace;
+            font-weight: bold;
+        }
+        
+        .word-input {
+            width: 100%;
+            padding: 10px;
+            background-color: #000040;
+            color: #ffffff;
+            border: 2px ridge #c0c0c0;
+            font-family: "Comic Sans MS", sans-serif;
+            margin-bottom: 10px;
+        }
+        
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+        
+        .team-score {
+            text-align: center;
+            padding: 10px;
+            border: 2px ridge #c0c0c0;
+            width: 45%;
+        }
+        
+        .team-a {
+            background-color: #800000;
+        }
+        
+        .team-b {
+            background-color: #000080;
+        }
+        
+        .animal-fact {
+            border: 1px dashed #ffff00;
+            padding: 10px;
+            margin: 15px 0;
+            background-color: #000040;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            text-align: center;
+            color: #00ff00;
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+        
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: explode 1s forwards;
+        }
+        
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(30);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>Web Rings</h1>
+                <h1>NOT codewords</h1>
                 <div class="under-construction">
                     <iframe src="images/under-construction.html" width="150" height="30" frameborder="0" scrolling="no"></iframe>
                     <span>Always Under Construction!</span>
@@ -19,7 +136,7 @@
         </div>
 
         <div class="marquee-container">
-            <marquee behavior="scroll" direction="left">★彡 Join me in exploring the interconnected web through these nostalgic web rings! 彡★</marquee>
+            <marquee behavior="scroll" direction="left">★彡 Guess words! Score points! Have fun! NOT codewords - the ultimate word guessing game! 彡★</marquee>
         </div>
 
         <div class="main-content">
@@ -31,7 +148,7 @@
                         <li><a href="about.html">About Me</a></li>
                         <li><a href="now.html">Now</a></li>
                         <li><a href="blogroll.html">Blogroll</a></li>
-                        <li class="active"><a href="webrings.html">Web Rings</a></li>
+                        <li class="active"><a href="webrings.html">NOT codewords</a></li>
                         <li><a href="projects.html">Projects</a></li>
                         <li><a href="bookshelf.html">Bookshelf</a></li>
                         <li><a href="setup.html">What I Use</a></li>
@@ -50,102 +167,90 @@
   \  /
    \/
     </pre>
-                    <div class="dragon-caption">Dragon loves web rings!</div>
+                    <div class="dragon-caption">Dragon loves word games!</div>
                 </div>
             </div>
 
             <div class="content">
-                <h2>Join Me in These Web Rings</h2>
+                <h2>NOT codewords - The Word Guessing Game</h2>
                 
                 <div class="intro">
-                    <p>Remember web rings? They were a way to discover similar websites before search engines dominated the internet. A web ring is a collection of websites linked together in a circular structure, allowing visitors to navigate from one site to the next with "previous" and "next" links.</p>
-                    <p>I'm proud to be a member of these web rings that celebrate the nostalgic web and connect like-minded creators!</p>
+                    <p>Welcome to <strong>NOT codewords</strong>, a word guessing game inspired by but legally distinct from a certain popular board game! One player knows the secret word, and the others try to guess it from all possible words in the English language.</p>
+                    <p>Set up your game below, customize your word list, set your timer, and have fun!</p>
                 </div>
                 
-                <div class="webring-item">
-                    <h3>~ The Retro Web Ring ~</h3>
-                    <div class="webring-description">
-                        <p>A collection of websites dedicated to preserving and celebrating the aesthetic of the early web.</p>
+                <div class="game-container">
+                    <h3>~ Game Setup ~</h3>
+                    
+                    <div class="setup-section">
+                        <h4>Word List</h4>
+                        <p>Enter your custom words below, separated by commas:</p>
+                        <textarea id="wordList" class="word-input" rows="5" placeholder="apple, banana, computer, dinosaur, elephant, etc..."></textarea>
+                        <button id="loadDefaultWords" class="game-controls">Load Default Words</button>
                     </div>
-                    <div class="webring-navigation">
-                        <a href="#">&lt;&lt; Previous</a> |
-                        <a href="#">Ring Home</a> |
-                        <a href="#">Random</a> |
-                        <a href="#">Next &gt;&gt;</a>
+                    
+                    <div class="setup-section">
+                        <h4>Timer Settings</h4>
+                        <div class="game-controls">
+                            <label for="timerMinutes">Minutes:</label>
+                            <input type="number" id="timerMinutes" min="0" max="10" value="2" style="width: 50px;">
+                            
+                            <label for="timerSeconds">Seconds:</label>
+                            <input type="number" id="timerSeconds" min="0" max="59" value="0" style="width: 50px;">
+                        </div>
                     </div>
-                    <div class="webring-members">
-                        <p>Currently 42 members</p>
+                    
+                    <div class="setup-section">
+                        <h4>Teams</h4>
+                        <div class="game-controls">
+                            <label for="teamAName">Team A Name:</label>
+                            <input type="text" id="teamAName" value="Red Team" style="width: 120px;">
+                            
+                            <label for="teamBName">Team B Name:</label>
+                            <input type="text" id="teamBName" value="Blue Team" style="width: 120px;">
+                        </div>
                     </div>
-                </div>
-                
-                <div class="webring-item">
-                    <h3>~ Vintage Computing Web Ring ~</h3>
-                    <div class="webring-description">
-                        <p>Connecting enthusiasts of retro computers, vintage hardware, and classic software.</p>
-                    </div>
-                    <div class="webring-navigation">
-                        <a href="#">&lt;&lt; Previous</a> |
-                        <a href="#">Ring Home</a> |
-                        <a href="#">Random</a> |
-                        <a href="#">Next &gt;&gt;</a>
-                    </div>
-                    <div class="webring-members">
-                        <p>Currently 28 members</p>
-                    </div>
-                </div>
-                
-                <div class="webring-item">
-                    <h3>~ GeoCities Nostalgia Ring ~</h3>
-                    <div class="webring-description">
-                        <p>Sites that capture the spirit and aesthetic of the legendary GeoCities neighborhoods.</p>
-                    </div>
-                    <div class="webring-navigation">
-                        <a href="#">&lt;&lt; Previous</a> |
-                        <a href="#">Ring Home</a> |
-                        <a href="#">Random</a> |
-                        <a href="#">Next &gt;&gt;</a>
-                    </div>
-                    <div class="webring-members">
-                        <p>Currently 56 members</p>
+                    
+                    <div class="game-controls">
+                        <button id="startGame">Start Game</button>
+                        <button id="resetGame">Reset Game</button>
                     </div>
                 </div>
                 
-                <div class="webring-item">
-                    <h3>~ ASCII Art Collective ~</h3>
-                    <div class="webring-description">
-                        <p>A web ring dedicated to the preservation and creation of ASCII and text art.</p>
+                <div class="game-container" id="gamePlayArea">
+                    <h3>~ Game In Progress ~</h3>
+                    
+                    <div class="timer-display" id="timerDisplay">02:00</div>
+                    
+                    <div class="game-controls">
+                        <button id="startTimer">Start Timer</button>
+                        <button id="pauseTimer">Pause Timer</button>
+                        <button id="resetTimer">Reset Timer</button>
                     </div>
-                    <div class="webring-navigation">
-                        <a href="#">&lt;&lt; Previous</a> |
-                        <a href="#">Ring Home</a> |
-                        <a href="#">Random</a> |
-                        <a href="#">Next &gt;&gt;</a>
+                    
+                    <div class="score-display">
+                        <div class="team-score team-a">
+                            <h4 id="teamANameDisplay">Red Team</h4>
+                            <div id="teamAScore">0</div>
+                        </div>
+                        <div class="team-score team-b">
+                            <h4 id="teamBNameDisplay">Blue Team</h4>
+                            <div id="teamBScore">0</div>
+                        </div>
                     </div>
-                    <div class="webring-members">
-                        <p>Currently 19 members</p>
+                    
+                    <div class="game-controls">
+                        <button id="teamAPoint">Point for Team A</button>
+                        <button id="teamBPoint">Point for Team B</button>
                     </div>
-                </div>
-                
-                <div class="webring-item">
-                    <h3>~ Personal Web Enthusiasts ~</h3>
-                    <div class="webring-description">
-                        <p>A community of people who believe in the power of personal websites in the age of social media.</p>
+                    
+                    <div class="animal-fact" id="animalFact">
+                        Loading fascinating animal facts...
                     </div>
-                    <div class="webring-navigation">
-                        <a href="#">&lt;&lt; Previous</a> |
-                        <a href="#">Ring Home</a> |
-                        <a href="#">Random</a> |
-                        <a href="#">Next &gt;&gt;</a>
+                    
+                    <div class="ascii-art" id="asciiArt">
+                        Loading cool ASCII art...
                     </div>
-                    <div class="webring-members">
-                        <p>Currently 37 members</p>
-                    </div>
-                </div>
-                
-                <div class="join-webring">
-                    <h3>~ Want to Join a Web Ring? ~</h3>
-                    <p>If you have a personal website with a similar aesthetic or interests, consider joining one of these web rings! Visit their home pages for information on how to join.</p>
-                    <p>Or if you'd like to start a new web ring with me, <a href="mailto:example@example.com">send me an email</a> with your ideas!</p>
                 </div>
             </div>
         </div>
@@ -153,16 +258,315 @@
         <div class="footer">
             <div class="webring">
                 <a href="#">&lt;&lt; Previous</a> | 
-                <a href="webrings.html">Web Rings</a> | 
+                <a href="webrings.html">NOT codewords</a> | 
                 <a href="#">Next &gt;&gt;</a>
             </div>
             <div class="copyright">
-                &copy; 2025 My Retro Saloon | Last updated: 03/28/2025
+                &copy; 2025 My Retro Saloon | Last updated: 04/06/2025
             </div>
             <div class="email">
                 <a href="mailto:example@example.com">Email Me</a> | <a href="#">Back to Top</a>
             </div>
         </div>
     </div>
+    
+    <div class="fireworks" id="fireworks"></div>
+    
+    <script>
+        // Default word list
+        const defaultWords = [
+            "apple", "banana", "carrot", "dolphin", "elephant", 
+            "flamingo", "giraffe", "hamburger", "igloo", "jellyfish",
+            "kangaroo", "lemon", "monkey", "notebook", "octopus",
+            "penguin", "quilt", "rainbow", "strawberry", "tiger",
+            "umbrella", "volcano", "watermelon", "xylophone", "yacht", "zebra"
+        ];
+        
+        // ASCII Art collection
+        const asciiArtCollection = [
+            `
+    /\\_/\\  
+   ( o.o ) 
+    > ^ <
+            `,
+            `
+     /^--^\\     /^--^\\     /^--^\\    
+    / o o \\   / o o \\   / o o \\   
+   ( =0= )  ( =0= )  ( =0= ) 
+    ^---^     ^---^     ^---^    
+            `,
+            `
+      _____
+     /     \\
+    | () () |
+     \\  ^  /
+      |||||
+            `,
+            `
+     .-.
+    (o o)
+    | O \\
+     \\   \\
+      '---'
+            `,
+            `
+     /\\_/\\
+    ( o.o )
+     > ^ <
+            `,
+            `
+     /\\_/\\
+    ( o.o )
+    (> < )
+            `,
+            `
+      /\\_/\\
+     / o o \\
+    (   "   )
+     \\~(*)~/
+      // \\\\
+            `
+        ];
+        
+        // Animal facts collection
+        const animalFactsCollection = [
+            "Octopuses have three hearts and blue blood.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "Koalas sleep up to 22 hours a day.",
+            "Mantis shrimp can see colors humans can't even imagine.",
+            "Wombats produce cube-shaped poop.",
+            "Sloths can hold their breath underwater for up to 40 minutes.",
+            "Axolotls can regrow their limbs, parts of their brain, and even heart.",
+            "Tardigrades can survive in space.",
+            "Platypuses glow under UV light.",
+            "Crows can recognize human faces and hold grudges.",
+            "Elephants are the only mammals that can't jump.",
+            "Goats have rectangular pupils.",
+            "Hippo milk is pink.",
+            "Otters have a pocket for their favorite rock.",
+            "Penguins propose with pebbles.",
+            "Butterflies taste with their feet.",
+            "Snails can sleep for up to three years.",
+            "Giraffes only need 5-30 minutes of sleep in a 24-hour period.",
+            "Dolphins have names for each other.",
+            "Hummingbirds can fly backwards.",
+            "Bees can recognize human faces.",
+            "Cats can't taste sweetness.",
+            "Armadillos always give birth to identical quadruplets.",
+            "Mantis shrimp punch so fast they create light.",
+            "Barnacles have the longest penis relative to body size in the animal kingdom."
+        ];
+        
+        // Game variables
+        let timerInterval;
+        let timeLeft = 120; // 2 minutes in seconds
+        let teamAScore = 0;
+        let teamBScore = 0;
+        let factInterval;
+        let artInterval;
+        
+        // DOM Elements
+        const timerDisplay = document.getElementById('timerDisplay');
+        const teamAScoreDisplay = document.getElementById('teamAScore');
+        const teamBScoreDisplay = document.getElementById('teamBScore');
+        const animalFactDisplay = document.getElementById('animalFact');
+        const asciiArtDisplay = document.getElementById('asciiArt');
+        const fireworksContainer = document.getElementById('fireworks');
+        
+        // Initialize the game
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load default words button
+            document.getElementById('loadDefaultWords').addEventListener('click', function() {
+                document.getElementById('wordList').value = defaultWords.join(', ');
+            });
+            
+            // Start game button
+            document.getElementById('startGame').addEventListener('click', function() {
+                const teamAName = document.getElementById('teamAName').value;
+                const teamBName = document.getElementById('teamBName').value;
+                
+                document.getElementById('teamANameDisplay').textContent = teamAName;
+                document.getElementById('teamBNameDisplay').textContent = teamBName;
+                
+                // Reset scores
+                teamAScore = 0;
+                teamBScore = 0;
+                updateScores();
+                
+                // Set timer
+                const minutes = parseInt(document.getElementById('timerMinutes').value) || 2;
+                const seconds = parseInt(document.getElementById('timerSeconds').value) || 0;
+                timeLeft = (minutes * 60) + seconds;
+                updateTimerDisplay();
+                
+                // Start rotating animal facts and ASCII art
+                startRotatingFacts();
+                startRotatingArt();
+                
+                alert('Game started! The word master should select a word from your list.');
+            });
+            
+            // Reset game button
+            document.getElementById('resetGame').addEventListener('click', function() {
+                resetGame();
+            });
+            
+            // Timer controls
+            document.getElementById('startTimer').addEventListener('click', startTimer);
+            document.getElementById('pauseTimer').addEventListener('click', pauseTimer);
+            document.getElementById('resetTimer').addEventListener('click', resetTimer);
+            
+            // Score controls
+            document.getElementById('teamAPoint').addEventListener('click', function() {
+                teamAScore++;
+                updateScores();
+                checkWinner();
+            });
+            
+            document.getElementById('teamBPoint').addEventListener('click', function() {
+                teamBScore++;
+                updateScores();
+                checkWinner();
+            });
+            
+            // Initialize with a random fact and art
+            displayRandomFact();
+            displayRandomArt();
+        });
+        
+        // Timer functions
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time\'s up!');
+                }
+            }, 1000);
+        }
+        
+        function pauseTimer() {
+            clearInterval(timerInterval);
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            const minutes = parseInt(document.getElementById('timerMinutes').value) || 2;
+            const seconds = parseInt(document.getElementById('timerSeconds').value) || 0;
+            timeLeft = (minutes * 60) + seconds;
+            updateTimerDisplay();
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Score functions
+        function updateScores() {
+            teamAScoreDisplay.textContent = teamAScore;
+            teamBScoreDisplay.textContent = teamBScore;
+        }
+        
+        function checkWinner() {
+            const winningScore = 5; // Can be adjusted
+            
+            if (teamAScore >= winningScore) {
+                showFireworks();
+                alert(`${document.getElementById('teamANameDisplay').textContent} wins!`);
+            } else if (teamBScore >= winningScore) {
+                showFireworks();
+                alert(`${document.getElementById('teamBNameDisplay').textContent} wins!`);
+            }
+        }
+        
+        // Animal facts and ASCII art functions
+        function displayRandomFact() {
+            const randomIndex = Math.floor(Math.random() * animalFactsCollection.length);
+            animalFactDisplay.textContent = animalFactsCollection[randomIndex];
+        }
+        
+        function displayRandomArt() {
+            const randomIndex = Math.floor(Math.random() * asciiArtCollection.length);
+            asciiArtDisplay.textContent = asciiArtCollection[randomIndex];
+        }
+        
+        function startRotatingFacts() {
+            clearInterval(factInterval);
+            factInterval = setInterval(displayRandomFact, 10000); // Change every 10 seconds
+        }
+        
+        function startRotatingArt() {
+            clearInterval(artInterval);
+            artInterval = setInterval(displayRandomArt, 15000); // Change every 15 seconds
+        }
+        
+        // Reset game function
+        function resetGame() {
+            clearInterval(timerInterval);
+            clearInterval(factInterval);
+            clearInterval(artInterval);
+            
+            teamAScore = 0;
+            teamBScore = 0;
+            updateScores();
+            
+            resetTimer();
+            
+            document.getElementById('teamANameDisplay').textContent = 'Red Team';
+            document.getElementById('teamBNameDisplay').textContent = 'Blue Team';
+            
+            document.getElementById('teamAName').value = 'Red Team';
+            document.getElementById('teamBName').value = 'Blue Team';
+            
+            document.getElementById('wordList').value = '';
+        }
+        
+        // Fireworks functions
+        function showFireworks() {
+            fireworksContainer.style.display = 'block';
+            
+            // Create 50 fireworks
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createFirework();
+                }, i * 100);
+            }
+            
+            // Hide fireworks after 5 seconds
+            setTimeout(() => {
+                fireworksContainer.style.display = 'none';
+                fireworksContainer.innerHTML = '';
+            }, 5000);
+        }
+        
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            
+            // Random position
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            // Random color
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            firework.style.backgroundColor = color;
+            
+            fireworksContainer.appendChild(firework);
+            
+            // Remove firework after animation
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
